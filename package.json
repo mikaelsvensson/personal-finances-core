@@ -1,0 +1,23 @@
+{
+  "name": "personal-finances-core",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mikael Svensson <mikael.svensson@klarna.com>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc --watch",
+    "test": "jest --watch"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "csv-parse": "^4.8.2"
+  },
+  "devDependencies": {
+    "@types/hapi__joi": "^16.0.3",
+    "@types/jest": "^24.0.23",
+    "@types/node": "12.12.5",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  }
+}
