@@ -6,15 +6,18 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc --watch",
-    "test": "jest --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
-    "csv-parse": "^4.8.2"
+    "csv-parse": "^4.8.2",
+    "js-yaml": "^3.13.1"
   },
   "devDependencies": {
     "@types/hapi__joi": "^16.0.3",
     "@types/jest": "^24.0.23",
+    "@types/js-yaml": "^3.12.1",
     "@types/node": "12.12.5",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",

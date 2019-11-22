@@ -1,6 +1,7 @@
 class VirtualAccount {
     constructor(public name: string,
-                public code: number) {
+                public code: number,
+                public id: string) {
 
     }
 }
