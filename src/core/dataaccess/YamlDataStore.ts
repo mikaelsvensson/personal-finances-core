@@ -25,7 +25,7 @@ class YamlDataStore implements DataStore {
                 obj.accountNumber,
                 obj.id))
 
-        const logicalAccounts: VirtualAccount[] = this.doc.logicalAccounts.map(
+        const virtualAccounts: VirtualAccount[] = this.doc.virtualAccounts.map(
             (obj: any) => new VirtualAccount(
                 obj.name,
                 obj.number,
@@ -40,7 +40,7 @@ class YamlDataStore implements DataStore {
                     (itemObj: any) => new TransactionItem(
                         itemObj.amount,
                         itemObj.name,
-                        logicalAccounts.find((virtualAccount: VirtualAccount) => virtualAccount.id == itemObj.logicalAccount) || null,
+                        virtualAccounts.find((virtualAccount: VirtualAccount) => virtualAccount.id == itemObj.virtualAccount) || null,
                         itemObj.id
                     )),
                 obj.id

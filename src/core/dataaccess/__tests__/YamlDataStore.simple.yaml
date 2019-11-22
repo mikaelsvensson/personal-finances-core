@@ -4,7 +4,7 @@ realAccounts:
     accountNumber: 123-456-789
     id: Daequ0ro
 
-logicalAccounts:
+virtualAccounts:
   - name: Food
     number: 100
     id: ieV0phee
@@ -18,28 +18,28 @@ transactions:
     items:
       - name: Scoops
         amount: 2500
-        logicalAccount: ieV0phee
+        virtualAccount: ieV0phee
       - name: Sprinkles
         amount: 500
-        logicalAccount: ieV0phee
+        virtualAccount: ieV0phee
   - name: Rent
     realAccount: Daequ0ro
     items:
       - amount: 500000
-        logicalAccount: oht4OoGh
+        virtualAccount: oht4OoGh
   - realAccount: Daequ0ro
     items:
       - name: Chair
         amount: 69900
-        logicalAccount: oht4OoGh
+        virtualAccount: oht4OoGh
   - realAccount: Daequ0ro
     items:
       - name: Milk
         amount: 1190
-        logicalAccount: ieV0phee
+        virtualAccount: ieV0phee
       - name: Bananas
         amount: 2391
-        logicalAccount: ieV0phee
+        virtualAccount: ieV0phee
       - name: Light bulb
         amount: 3990
-        logicalAccount: oht4OoGh
+        virtualAccount: oht4OoGh
