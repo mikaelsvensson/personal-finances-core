@@ -3,7 +3,7 @@ import SwedbankCsvImporter from '../SwedbankCsvImporter'
 describe('SwedbankCsvImporter', () => {
     const importer = new SwedbankCsvImporter()
 
-    it('should handle real file', async () => {
+    test('should handle real file', async () => {
         const res = await importer.loadTransactionsFromFile('src/importer/__tests__/SwedbankCsvImporter.csv')
         expect(res).toHaveLength(10)
 

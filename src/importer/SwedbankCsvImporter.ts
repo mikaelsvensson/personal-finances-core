@@ -5,7 +5,6 @@ import RealAccount from "../core/RealAccount";
 import * as fs from 'fs';
 import {default as csv} from 'csv-parse/lib/sync';
 import * as joi from '@hapi/joi';
-import VirtualAccount from "../core/VirtualAccount";
 
 const amountSchema = joi.string().pattern(/^-?[0-9]+\.[0-9]{2}$/)
 
@@ -34,7 +33,7 @@ class SwedbankCsvImporter implements Importer {
             encoding: 'latin1'
         });
 
-        const rows : object[] = csv(rawData, {
+        const rows: object[] = csv(rawData, {
             from_line: 3,
             columns: [
                 'rowNumber',
@@ -51,7 +50,6 @@ class SwedbankCsvImporter implements Importer {
                 'balanceAfter'
             ]
         });
-        console.log('')
         return Promise.resolve(rows.map(data => {
             const {value, error} = rowSchema.validate(data)
             if (!error) {
@@ -66,11 +64,20 @@ class SwedbankCsvImporter implements Importer {
         }).map(value => {
             return new Transaction(
                 value.transactionType,
-                new RealAccount(`${value.clearingNumber} ${value.accountNumber}`, 'Swedbank', `${value.clearingNumber} ${value.accountNumber}`),
+                new RealAccount(
+                    `${value.clearingNumber} ${value.accountNumber}`,
+                    'Swedbank',
+                    `${value.clearingNumber} ${value.accountNumber}`,
+                    null),
                 value.transactionDate,
                 [
-                    new TransactionItem(value.amount, value.reference, new VirtualAccount('', 0))
-                ]
+                    new TransactionItem(
+                        value.amount,
+                        value.reference,
+                        null,
+                        null)
+                ],
+                null
             )
         }))
     }
