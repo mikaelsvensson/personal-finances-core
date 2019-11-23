@@ -1,7 +1,7 @@
-import Transaction from "../core/Transaction";
+import Transaction from '../core/Transaction'
 
 interface Importer {
-    loadTransactionsFromFile(path: string): Promise<Transaction[]>;
+  loadTransactionsFromFile(path: string): Promise<Transaction[]>
 }
 
 export default Importer

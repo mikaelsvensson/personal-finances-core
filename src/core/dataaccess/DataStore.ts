@@ -1,21 +1,21 @@
-import Transaction from "../Transaction";
-import RealAccount from "../RealAccount";
-import VirtualAccount from "../VirtualAccount";
+import Transaction from '../Transaction'
+import RealAccount from '../RealAccount'
+import VirtualAccount from '../VirtualAccount'
 
 interface DataStore {
-    createTransaction(transaction: Transaction): string
+  createTransaction(transaction: Transaction): string
 
-    readTransaction(id: string): Transaction | null
+  readTransaction(id: string): Transaction | null
 
-    readTransactionsAll(): Transaction[]
+  readTransactionsAll(): Transaction[]
 
-    createRealAccount(realAccount: RealAccount): string
+  createRealAccount(realAccount: RealAccount): string
 
-    readRealAccount(id: string): RealAccount | null
+  readRealAccount(id: string): RealAccount | null
 
-    createVirtualAccount(virtualAccount: VirtualAccount): string
+  createVirtualAccount(virtualAccount: VirtualAccount): string
 
-    readVirtualAccount(id: string): VirtualAccount | null
+  readVirtualAccount(id: string): VirtualAccount | null
 }
 
 export default DataStore

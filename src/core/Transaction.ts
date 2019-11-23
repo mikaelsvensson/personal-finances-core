@@ -1,26 +1,31 @@
-import RealAccount from "./RealAccount";
-import TransactionItem from "./TransactionItem";
+import RealAccount from './RealAccount'
+import TransactionItem from './TransactionItem'
 
 class Transaction {
-    constructor(public text: string,
-                public realAccount: RealAccount | null,
-                public date: Date,
-                public items: TransactionItem[],
-                public id: string | null) {
+  constructor(
+    public text: string,
+    public realAccount: RealAccount | null,
+    public date: Date,
+    public items: TransactionItem[],
+    public id: string | null
+  ) {}
 
-    }
+  sum(): number {
+    return this.items.reduce(function(sum: number, item: TransactionItem) {
+      return sum + item.amount
+    }, 0)
+  }
 
-    sum(): number {
-        return this.items.reduce(function (sum: number, item: TransactionItem) {
-            return sum + item.amount
-        }, 0)
-    }
-
-    description(): string {
-        return this.text || this.items.map(function (item: TransactionItem) {
-            return item.text
-        }).join(', ')
-    }
+  description(): string {
+    return (
+      this.text ||
+      this.items
+        .map(function(item: TransactionItem) {
+          return item.text
+        })
+        .join(', ')
+    )
+  }
 }
 
 export default Transaction
