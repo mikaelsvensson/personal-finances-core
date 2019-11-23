@@ -1,10 +1,11 @@
-import Importer from './Importer'
+import TransactionReader from './TransactionReader'
 import Transaction from '../core/Transaction'
 import TransactionItem from '../core/TransactionItem'
 import RealAccount from '../core/RealAccount'
 import * as fs from 'fs'
 import { default as csv } from 'csv-parse/lib/sync'
 import * as joi from '@hapi/joi'
+import * as crypto from 'crypto'
 
 const amountSchema = joi.string().pattern(/^-?[0-9]+\.[0-9]{2}$/)
 
@@ -25,7 +26,14 @@ const rowSchema = joi.object({
   balanceAfter: amountSchema
 })
 
-class SwedbankCsvImporter implements Importer {
+class SwedbankCsvTransactionReader implements TransactionReader {
+  private md5(value: string) {
+    return crypto
+      .createHash('md5')
+      .update(value)
+      .digest('hex')
+  }
+
   loadTransactionsFromFile(path: string): Promise<Transaction[]> {
     const results: Transaction[] = []
 
@@ -66,16 +74,22 @@ class SwedbankCsvImporter implements Importer {
           return !!data
         })
         .map(value => {
+          const items = [new TransactionItem(value.amount, value.reference, null, null)]
+
+          const realAccount = new RealAccount(
+            `${value.clearingNumber} ${value.accountNumber}`,
+            'Swedbank',
+            `${value.clearingNumber} ${value.accountNumber}`,
+            this.md5(`SWEDBANK:${value.clearingNumber}:${value.accountNumber}`),
+            null
+          )
+
           return new Transaction(
             value.transactionType,
-            new RealAccount(
-              `${value.clearingNumber} ${value.accountNumber}`,
-              'Swedbank',
-              `${value.clearingNumber} ${value.accountNumber}`,
-              null
-            ),
+            realAccount,
             value.transactionDate,
-            [new TransactionItem(value.amount, value.reference, null, null)],
+            items,
+            this.md5(`${value.bookingDate.getTime()}:${value.reference}:${value.amount}`),
             null
           )
         })
@@ -83,4 +97,4 @@ class SwedbankCsvImporter implements Importer {
   }
 }
 
-export default SwedbankCsvImporter
+export default SwedbankCsvTransactionReader

@@ -7,6 +7,7 @@ class Transaction {
     public realAccount: RealAccount | null,
     public date: Date,
     public items: TransactionItem[],
+    public sourceReference: string | null,
     public id: string | null
   ) {}
 

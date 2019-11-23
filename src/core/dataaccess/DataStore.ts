@@ -7,11 +7,15 @@ interface DataStore {
 
   readTransaction(id: string): Transaction | null
 
+  readTransactionBySourceReference(sourceReference: string): Transaction | null
+
   readTransactionsAll(): Transaction[]
 
   createRealAccount(realAccount: RealAccount): string
 
   readRealAccount(id: string): RealAccount | null
+
+  readRealAccountBySourceReference(sourceReference: string): RealAccount | null
 
   createVirtualAccount(virtualAccount: VirtualAccount): string
 

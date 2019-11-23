@@ -1,7 +1,7 @@
 import Transaction from '../core/Transaction'
 
-interface Importer {
+interface TransactionReader {
   loadTransactionsFromFile(path: string): Promise<Transaction[]>
 }
 
-export default Importer
+export default TransactionReader

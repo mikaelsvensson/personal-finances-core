@@ -1,10 +1,10 @@
-import SwedbankCsvImporter from '../SwedbankCsvImporter'
+import SwedbankCsvTransactionReader from '../SwedbankCsvTransactionReader'
 
-describe('SwedbankCsvImporter', () => {
-  const importer = new SwedbankCsvImporter()
+describe('SwedbankCsvTransactionReader', () => {
+  const importer = new SwedbankCsvTransactionReader()
 
   test('should handle real file', async () => {
-    const res = await importer.loadTransactionsFromFile('src/importer/__tests__/SwedbankCsvImporter.csv')
+    const res = await importer.loadTransactionsFromFile('src/importer/__tests__/SwedbankCsvTransactionReader.csv')
     expect(res).toHaveLength(10)
 
     expect(res[0].text).toBe('Autogiro')

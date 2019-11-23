@@ -26,7 +26,7 @@ describe('YamlDataStore', () => {
   test('createRealAccount, createVirtualAccount and createTransaction', () => {
     const store = new YamlDataStore()
 
-    const realAccountId = store.createRealAccount(new RealAccount('My account', 'Big Bank', '123-456-789', null))
+    const realAccountId = store.createRealAccount(new RealAccount('My account', 'Big Bank', '123-456-789', null, null))
 
     const realAccount = store.readRealAccount(realAccountId)
 
@@ -40,6 +40,7 @@ describe('YamlDataStore', () => {
         realAccount,
         new Date(),
         [new TransactionItem(2500, 'Scoops', virtualAccount, null), new TransactionItem(500, 'Sprinkles', null, null)],
+        null,
         null
       )
     )
@@ -50,6 +51,7 @@ describe('YamlDataStore', () => {
     expect(readTransaction?.realAccount?.name).toBeTruthy()
     expect(readTransaction?.items[0].virtualAccount?.name).toBeTruthy()
 
+    // TODO: Don't save result to file
     store.save(`src/core/dataaccess/__tests__/YamlDataStore.createTransaction.${new Date().getTime()}.yaml`)
   })
 })

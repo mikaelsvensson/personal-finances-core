@@ -17,7 +17,8 @@ class YamlDataStore implements DataStore {
       const doc = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
 
       this.realAccounts = doc.realAccounts.map(
-        (obj: any) => new RealAccount(obj.name, obj.finalcialInstitution, obj.accountNumber, obj.id)
+        (obj: any) =>
+          new RealAccount(obj.name, obj.finalcialInstitution, obj.accountNumber, obj.sourceReference, obj.id)
       )
 
       this.virtualAccounts = doc.virtualAccounts.map((obj: any) => new VirtualAccount(obj.name, obj.number, obj.id))
@@ -39,6 +40,7 @@ class YamlDataStore implements DataStore {
                   itemObj.id
                 )
             ),
+            obj.sourceReference,
             obj.id
           )
       )
@@ -71,11 +73,17 @@ class YamlDataStore implements DataStore {
     const dump = yaml.safeDump(doc, {
       lineWidth: 120
     })
-    fs.writeFileSync(filePath, dump)
+    fs.writeFileSync(filePath, dump, {
+      encoding: 'utf-8'
+    })
   }
 
   readTransaction(id: string): Transaction | null {
     return this.transactions.find((transaction: Transaction) => transaction.id === id) || null
+  }
+
+  readTransactionBySourceReference(sourceReference: string): Transaction | null {
+    return this.transactions.find((transaction: Transaction) => transaction.sourceReference === sourceReference) || null
   }
 
   readVirtualAccount(id: string): VirtualAccount | null {
@@ -84,6 +92,10 @@ class YamlDataStore implements DataStore {
 
   readRealAccount(id: string): RealAccount | null {
     return this.realAccounts.find((realAccount: RealAccount) => realAccount.id === id) || null
+  }
+
+  readRealAccountBySourceReference(sourceReference: string): RealAccount | null {
+    return this.realAccounts.find((realAccount: RealAccount) => realAccount.sourceReference === sourceReference) || null
   }
 
   readTransactionsAll(): Transaction[] {
