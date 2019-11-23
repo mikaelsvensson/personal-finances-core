@@ -14,32 +14,32 @@ virtualAccounts:
 
 transactions:
   - name: Ice Cream
-    realAccount: Daequ0ro
+    realAccountId: Daequ0ro
     items:
       - name: Scoops
         amount: 2500
-        virtualAccount: ieV0phee
+        virtualAccountId: ieV0phee
       - name: Sprinkles
         amount: 500
-        virtualAccount: ieV0phee
+        virtualAccountId: ieV0phee
   - name: Rent
-    realAccount: Daequ0ro
+    realAccountId: Daequ0ro
     items:
       - amount: 500000
-        virtualAccount: oht4OoGh
-  - realAccount: Daequ0ro
+        virtualAccountId: oht4OoGh
+  - realAccountId: Daequ0ro
     items:
       - name: Chair
         amount: 69900
-        virtualAccount: oht4OoGh
-  - realAccount: Daequ0ro
+        virtualAccountId: oht4OoGh
+  - realAccountId: Daequ0ro
     items:
       - name: Milk
         amount: 1190
-        virtualAccount: ieV0phee
+        virtualAccountId: ieV0phee
       - name: Bananas
         amount: 2391
-        virtualAccount: ieV0phee
+        virtualAccountId: ieV0phee
       - name: Light bulb
         amount: 3990
-        virtualAccount: oht4OoGh
+        virtualAccountId: oht4OoGh
