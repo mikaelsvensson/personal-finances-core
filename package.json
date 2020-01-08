@@ -1,6 +1,6 @@
 {
   "name": "@mikaelsvensson/personal-finances-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
   "author": "Mikael Svensson <github@mikaelsvensson.info>",
