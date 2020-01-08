@@ -1,15 +1,20 @@
 {
-  "name": "personal-finances-core",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Mikael Svensson <mikael.svensson@klarna.com>",
+  "name": "@mikaelsvensson/personal-finances-core",
+  "version": "0.0.2",
+  "main": "src/index.js",
+  "typings": "src/index.d.ts",
+  "author": "Mikael Svensson <github@mikaelsvensson.info>",
   "license": "MIT",
+  "repository": "git://github.com/mikaelsvensson/personal-finances-core.git",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
+    "build": "tsc --module commonjs",
+    "build:watch": "tsc --watch --module commonjs",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tsc --noEmit && eslint '*/**/*.ts' --quiet --fix"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
