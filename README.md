@@ -25,3 +25,17 @@ I made this library to help myself...
     $ yarn
     $ yarn watch
     $ yarn test
+    
+# Publish Packages
+
+Prerequisites:
+
+    $ npm login --registry=https://npm.pkg.github.com --scope=@mikaelsvensson
+
+$ cat ~/.npmrc
+
+Publish: 
+    
+    $ yarn publish
+
+Check out https://github.com/mikaelsvensson/personal-finances-core/packages for list of published package versions.
