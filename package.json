@@ -1,8 +1,11 @@
 {
   "name": "@mikaelsvensson/personal-finances-core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "author": "Mikael Svensson <github@mikaelsvensson.info>",
   "license": "MIT",
   "repository": "git://github.com/mikaelsvensson/personal-finances-core.git",
