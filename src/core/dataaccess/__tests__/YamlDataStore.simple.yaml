@@ -15,6 +15,7 @@ virtualAccounts:
 transactions:
   - text: Ice Cream
     realAccountId: Daequ0ro
+    id: ohphu2Ya
     items:
       - text: Scoops
         amount: 2500
@@ -24,15 +25,18 @@ transactions:
         virtualAccountId: ieV0phee
   - text: Rent
     realAccountId: Daequ0ro
+    id: Piet3aix
     items:
       - amount: 500000
         virtualAccountId: oht4OoGh
   - realAccountId: Daequ0ro
+    id: Aine3Eew
     items:
       - text: Chair
         amount: 69900
         virtualAccountId: oht4OoGh
   - realAccountId: Daequ0ro
+    id: Too0chae
     items:
       - text: Milk
         amount: 1190

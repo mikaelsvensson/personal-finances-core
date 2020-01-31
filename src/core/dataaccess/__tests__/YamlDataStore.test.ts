@@ -100,4 +100,37 @@ describe('YamlDataStore', () => {
     expect(verifyTransaction?.items[1].amount).toBe(500)
     expect(verifyTransaction?.items[1].virtualAccount).toBeFalsy()
   })
+
+  describe('delete', () => {
+    test('existing transaction', () => {
+      const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
+      const idsBefore = store.readTransactionsAll().map((transaction: Transaction) => transaction.id)
+      expect(idsBefore).toContain('Too0chae')
+
+      store.deleteTransaction('Too0chae')
+
+      const trans2 = store.readTransaction('Too0chae')
+      expect(trans2).toBeFalsy()
+
+      const idsAfter = store.readTransactionsAll().map((transaction: Transaction) => transaction.id)
+      expect(idsAfter).not.toContain('Too0chae')
+      expect(idsAfter).toHaveLength(idsBefore.length - 1)
+    })
+
+    test('missing transaction', () => {
+      const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
+      const idsBefore = store.readTransactionsAll().map((transaction: Transaction) => transaction.id)
+      expect(idsBefore).not.toContain('missing')
+
+      try {
+        store.deleteTransaction('missing')
+        fail('Should have failed')
+      } catch (e) {
+        // Expected
+        const idsAfter = store.readTransactionsAll().map((transaction: Transaction) => transaction.id)
+        expect(idsAfter).not.toContain('missing')
+        expect(idsAfter).toHaveLength(idsBefore.length)
+      }
+    })
+  })
 })

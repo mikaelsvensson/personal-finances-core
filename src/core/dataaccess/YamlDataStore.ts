@@ -119,6 +119,15 @@ class YamlDataStore implements DataStore {
     this.transactions.push(transaction)
     return transaction.id
   }
+
+  deleteTransaction(id: string): void {
+    const index = this.transactions.findIndex((transaction: Transaction) => transaction.id === id)
+    if (index !== -1) {
+      this.transactions.splice(index, 1)
+    } else {
+      throw new Error(`Transaction ${id} not found`)
+    }
+  }
 }
 
 export default YamlDataStore
