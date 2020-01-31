@@ -1,6 +1,6 @@
 realAccounts:
   - name: My transaction account
-    finalcialInstitution: BigBank
+    financialInstitution: BigBank
     accountNumber: 123-456-789
     id: Daequ0ro
 
@@ -13,33 +13,33 @@ virtualAccounts:
     id: oht4OoGh
 
 transactions:
-  - name: Ice Cream
+  - text: Ice Cream
     realAccountId: Daequ0ro
     items:
-      - name: Scoops
+      - text: Scoops
         amount: 2500
         virtualAccountId: ieV0phee
-      - name: Sprinkles
+      - text: Sprinkles
         amount: 500
         virtualAccountId: ieV0phee
-  - name: Rent
+  - text: Rent
     realAccountId: Daequ0ro
     items:
       - amount: 500000
         virtualAccountId: oht4OoGh
   - realAccountId: Daequ0ro
     items:
-      - name: Chair
+      - text: Chair
         amount: 69900
         virtualAccountId: oht4OoGh
   - realAccountId: Daequ0ro
     items:
-      - name: Milk
+      - text: Milk
         amount: 1190
         virtualAccountId: ieV0phee
-      - name: Bananas
+      - text: Bananas
         amount: 2391
         virtualAccountId: ieV0phee
-      - name: Light bulb
+      - text: Light bulb
         amount: 3990
         virtualAccountId: oht4OoGh

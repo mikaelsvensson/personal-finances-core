@@ -18,22 +18,22 @@ class YamlDataStore implements DataStore {
 
       this.realAccounts = doc.realAccounts.map(
         (obj: any) =>
-          new RealAccount(obj.name, obj.finalcialInstitution, obj.accountNumber, obj.sourceReference, obj.id)
+          new RealAccount(obj.name, obj.financialInstitution, obj.accountNumber, obj.sourceReference, obj.id)
       )
 
-      this.virtualAccounts = doc.virtualAccounts.map((obj: any) => new VirtualAccount(obj.name, obj.number, obj.id))
+      this.virtualAccounts = doc.virtualAccounts.map((obj: any) => new VirtualAccount(obj.name, obj.code, obj.id))
 
       this.transactions = doc.transactions.map(
         (obj: any) =>
           new Transaction(
-            obj.name,
+            obj.text,
             this.realAccounts.find((realAccount: RealAccount) => realAccount.id == obj.realAccountId) || null,
             new Date(),
             obj.items.map(
               (itemObj: any) =>
                 new TransactionItem(
                   itemObj.amount,
-                  itemObj.name,
+                  itemObj.text,
                   this.virtualAccounts.find(
                     (virtualAccount: VirtualAccount) => virtualAccount.id == itemObj.virtualAccountId
                   ) || null,

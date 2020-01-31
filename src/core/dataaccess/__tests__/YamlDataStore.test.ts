@@ -54,4 +54,50 @@ describe('YamlDataStore', () => {
     // TODO: Don't save result to file
     store.save(`src/core/dataaccess/__tests__/YamlDataStore.createTransaction.${new Date().getTime()}.yaml`)
   })
+
+  test('save and load', () => {
+    const saveStore = new YamlDataStore()
+
+    const realAccountId = saveStore.createRealAccount(new RealAccount('My account', 'Big Bank', '123-456-789', null, null))
+
+    const realAccount = saveStore.readRealAccount(realAccountId)
+
+    const virtualAccountId = saveStore.createVirtualAccount(new VirtualAccount('Food', 100, null))
+
+    const virtualAccount = saveStore.readVirtualAccount(virtualAccountId)
+
+    const transactionId = saveStore.createTransaction(
+      new Transaction(
+        'Ice Cream',
+        realAccount,
+        new Date(),
+        [new TransactionItem(2500, 'Scoops', virtualAccount, null), new TransactionItem(500, 'Sprinkles', null, null)],
+        null,
+        null
+      )
+    )
+
+    // TODO: Don't save result to file
+    const path = `src/core/dataaccess/__tests__/YamlDataStore.saveAndLoad.${new Date().getTime()}.yaml`
+    saveStore.save(path)
+
+    const verifyStore = new YamlDataStore()
+    verifyStore.load(path)
+
+    const verifyTransaction = verifyStore.readTransaction(transactionId)
+
+    expect(verifyTransaction?.id).toBeTruthy()
+    expect(verifyTransaction?.realAccount?.name).toBe('My account')
+    expect(verifyTransaction?.realAccount?.accountNumber).toBe('123-456-789')
+    expect(verifyTransaction?.realAccount?.financialInstitution).toBe('Big Bank')
+    expect(verifyTransaction?.realAccount?.sourceReference).toBeFalsy()
+    expect(verifyTransaction?.text).toBe('Ice Cream')
+    expect(verifyTransaction?.items[0].text).toBe('Scoops')
+    expect(verifyTransaction?.items[0].amount).toBe(2500)
+    expect(verifyTransaction?.items[0].virtualAccount?.name).toBe('Food')
+    expect(verifyTransaction?.items[0].virtualAccount?.code).toBe(100)
+    expect(verifyTransaction?.items[1].text).toBe('Sprinkles')
+    expect(verifyTransaction?.items[1].amount).toBe(500)
+    expect(verifyTransaction?.items[1].virtualAccount).toBeFalsy()
+  })
 })
