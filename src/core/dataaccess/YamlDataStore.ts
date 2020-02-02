@@ -131,15 +131,17 @@ class YamlDataStore implements DataStore {
 
   deleteVirtualAccount(id: string): void {
     const index = this.virtualAccounts.findIndex((account: VirtualAccount) => account.id === id)
-    if (index !== -1) {
-      this.virtualAccounts.splice(index, 1)
-    } else {
+    if (index === -1) {
       throw new Error(`Account ${id} not found`)
     }
+    if (this.transactions.some(transaction => transaction.items.some(item => item.virtualAccount?.id === id))) {
+      throw new Error(`Account ${id} used by at least one transaction`)
+    }
+    this.virtualAccounts.splice(index, 1)
   }
 
   readVirtualAccountsAll(): VirtualAccount[] {
-    return this.virtualAccounts;
+    return this.virtualAccounts
   }
 }
 

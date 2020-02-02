@@ -135,22 +135,38 @@ describe('YamlDataStore', () => {
   })
 
   describe('delete virtual account', () => {
-    test('existing transaction', () => {
+    test('existing used account', () => {
       const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
       const idsBefore = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
       expect(idsBefore).toContain('oht4OoGh')
 
-      store.deleteVirtualAccount('oht4OoGh')
+      try {
+        store.deleteVirtualAccount('oht4OoGh')
+        fail('Should have failed')
+      } catch (e) {
+        // Expected
+        expect(e.message).toContain('used by at least one transaction')
+        const idsAfter = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+        expect(idsAfter).toEqual(idsBefore)
+      }
+    })
 
-      const trans2 = store.readVirtualAccount('oht4OoGh')
+    test('existing unused account', () => {
+      const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
+      const idsBefore = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+      expect(idsBefore).toContain('Nah2aapa')
+
+      store.deleteVirtualAccount('Nah2aapa')
+
+      const trans2 = store.readVirtualAccount('Nah2aapa')
       expect(trans2).toBeFalsy()
 
       const idsAfter = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
-      expect(idsAfter).not.toContain('oht4OoGh')
+      expect(idsAfter).not.toContain('Nah2aapa')
       expect(idsAfter).toHaveLength(idsBefore.length - 1)
     })
 
-    test('missing transaction', () => {
+    test('missing account', () => {
       const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
       const idsBefore = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
       expect(idsBefore).not.toContain('missing')
@@ -165,6 +181,5 @@ describe('YamlDataStore', () => {
         expect(idsAfter).toHaveLength(idsBefore.length)
       }
     })
-
   })
 })

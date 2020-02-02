@@ -11,6 +11,9 @@ virtualAccounts:
   - name: Living
     number: 200
     id: oht4OoGh
+  - name: Vacation
+    number: 200
+    id: Nah2aapa
 
 transactions:
   - text: Ice Cream
