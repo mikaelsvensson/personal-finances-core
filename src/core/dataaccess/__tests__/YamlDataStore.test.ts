@@ -133,4 +133,38 @@ describe('YamlDataStore', () => {
       }
     })
   })
+
+  describe('delete virtual account', () => {
+    test('existing transaction', () => {
+      const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
+      const idsBefore = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+      expect(idsBefore).toContain('oht4OoGh')
+
+      store.deleteVirtualAccount('oht4OoGh')
+
+      const trans2 = store.readVirtualAccount('oht4OoGh')
+      expect(trans2).toBeFalsy()
+
+      const idsAfter = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+      expect(idsAfter).not.toContain('oht4OoGh')
+      expect(idsAfter).toHaveLength(idsBefore.length - 1)
+    })
+
+    test('missing transaction', () => {
+      const store = new YamlDataStore().load('src/core/dataaccess/__tests__/YamlDataStore.simple.yaml')
+      const idsBefore = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+      expect(idsBefore).not.toContain('missing')
+
+      try {
+        store.deleteVirtualAccount('missing')
+        fail('Should have failed')
+      } catch (e) {
+        // Expected
+        const idsAfter = store.readVirtualAccountsAll().map((account: VirtualAccount) => account.id)
+        expect(idsAfter).not.toContain('missing')
+        expect(idsAfter).toHaveLength(idsBefore.length)
+      }
+    })
+
+  })
 })

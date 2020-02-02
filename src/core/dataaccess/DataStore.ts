@@ -20,6 +20,7 @@ interface DataStore {
   //
   // Real accounts
   //
+
   createRealAccount(realAccount: RealAccount): string
 
   readRealAccount(id: string): RealAccount | null
@@ -29,9 +30,14 @@ interface DataStore {
   //
   // Virtual accounts
   //
+
   createVirtualAccount(virtualAccount: VirtualAccount): string
 
   readVirtualAccount(id: string): VirtualAccount | null
+
+  readVirtualAccountsAll(id: string): VirtualAccount[]
+
+  deleteVirtualAccount(id: string): void
 }
 
 export default DataStore

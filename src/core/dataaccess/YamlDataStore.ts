@@ -128,6 +128,19 @@ class YamlDataStore implements DataStore {
       throw new Error(`Transaction ${id} not found`)
     }
   }
+
+  deleteVirtualAccount(id: string): void {
+    const index = this.virtualAccounts.findIndex((account: VirtualAccount) => account.id === id)
+    if (index !== -1) {
+      this.virtualAccounts.splice(index, 1)
+    } else {
+      throw new Error(`Account ${id} not found`)
+    }
+  }
+
+  readVirtualAccountsAll(): VirtualAccount[] {
+    return this.virtualAccounts;
+  }
 }
 
 export default YamlDataStore
